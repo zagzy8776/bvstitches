@@ -12,8 +12,6 @@ import appCss from "../styles.css?url";
 import { reportHiggsfieldError } from "../lib/higgsfield-error-reporting";
 import appMetaJson from "../app-meta.json";
 
-declare const __HF_DESIGN_INSPECTOR__: boolean;
-
 const DEFAULT_TITLE = "BV Stitches | Bespoke Tailoring";
 const DEFAULT_DESCRIPTION = "Book a fitting with BV Stitches for bespoke tailoring, native wear, alterations and detailed finishing.";
 
@@ -120,16 +118,6 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  useEffect(() => {
-    if (!__HF_DESIGN_INSPECTOR__) return;
-    void import("../module/design-inspector/runtime")
-      .then(({ installHiggsfieldDesignInspector }) => installHiggsfieldDesignInspector())
-      .catch((error) => {
-        reportHiggsfieldError(error instanceof Error ? error : new Error("Design inspector failed"), {
-          boundary: "atelier_design_inspector_import",
-        });
-      });
-  }, []);
 
   return <QueryClientProvider client={queryClient}><Outlet /></QueryClientProvider>;
 }

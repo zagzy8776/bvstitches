@@ -64,9 +64,6 @@ function buildHead(meta: AppMeta) {
     links: [
       { rel: "stylesheet", href: appCss },
       ...(favicon ? [{ rel: "icon", href: favicon, type: "image/svg+xml" }] : []),
-      
-      
-      
     ],
   };
 }
@@ -75,8 +72,8 @@ function NotFoundComponent() {
   return (
     <main className="site-error">
       <span>404</span>
-      <h1>This page is not part of the study.</h1>
-      <a href="/">Return to Atelier Dimension</a>
+      <h1>That fitting room does not exist.</h1>
+      <a href="/">Return to BV Stitches</a>
     </main>
   );
 }
@@ -85,13 +82,13 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportHiggsfieldError(error, { boundary: "atelier_root_error_component" });
+    reportHiggsfieldError(error, { boundary: "bv_root_error_component" });
   }, [error]);
 
   return (
     <main className="site-error">
       <span>ERROR</span>
-      <h1>The atelier did not load.</h1>
+      <h1>The atelier needs another stitch.</h1>
       <button onClick={() => { router.invalidate(); reset(); }}>Try again</button>
       <a href="/">Return home</a>
     </main>
@@ -117,7 +114,5 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
-
   return <QueryClientProvider client={queryClient}><Outlet /></QueryClientProvider>;
 }

@@ -656,14 +656,6 @@ export function AtelierDepth() {
       <canvas ref={canvasRef} className="depth-webgl" aria-hidden="true" />
       <div className="depth-vignette" aria-hidden="true" />
       <div className="depth-grid" aria-hidden="true" />
-      <div className="depth-mark" aria-hidden="true">BV / 3D ATELIER</div>
-      <div className="depth-caption" aria-hidden="true">
-        Tailoring / Form / Dimension
-      </div>
-      <div className="depth-live" aria-hidden="true">
-        <span />
-        Interactive 3D study
-      </div>
     </div>
   );
 }

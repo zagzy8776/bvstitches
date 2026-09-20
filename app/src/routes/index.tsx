@@ -49,7 +49,7 @@ function Index() {
           <p className="body-copy">The garments carry the interface. The measuring tape becomes a line through the composition, and the details become the navigation.</p>
         </div>
         <div className="detail-stage">
-          <div className="detail-video"><video className="detail-video-desktop" autoPlay loop muted playsInline preload="metadata" poster="/assets/world/atelier-detail-poster.png" src="/assets/world/atelier-detail.mp4" /><video className="detail-video-mobile" autoPlay loop muted playsInline preload="metadata" poster="/assets/world/atelier-detail-mobile-poster.png" src="/assets/world/atelier-detail-mobile.mp4" /></div>
+          <div className="detail-video"><video className="detail-video-desktop" autoPlay loop muted playsInline preload="metadata" poster="https://atelier-dimension.higgsfield.app/assets/world/atelier-detail-poster.png" src="https://atelier-dimension.higgsfield.app/assets/world/atelier-detail.mp4" /><video className="detail-video-mobile" autoPlay loop muted playsInline preload="metadata" poster="https://atelier-dimension.higgsfield.app/assets/world/atelier-detail-mobile-poster.png" src="https://atelier-dimension.higgsfield.app/assets/world/atelier-detail-mobile.mp4" /></div>
           <div className="detail-label"><span>DETAIL / 03</span><span>GEOMETRY / TEXTILE / LINE</span></div>
           <div className="detail-orbit orbit-a" /><div className="detail-orbit orbit-b" />
         </div>

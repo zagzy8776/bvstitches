@@ -114,7 +114,7 @@ export function AtelierDepth() {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
     const image = new Image();
-    image.src = "/assets/source/atelier-collage.png";
+    image.src = "https://atelier-dimension.higgsfield.app/assets/source/atelier-collage.png";
     image.onload = () => {
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);

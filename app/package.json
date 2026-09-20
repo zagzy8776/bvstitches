@@ -3,9 +3,6 @@
   "private": true,
   "sideEffects": false,
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "dev": "vite dev",
     "dev:design": "HF_DESIGN_INSPECTOR=1 vite dev --mode design",
@@ -23,10 +20,6 @@
   },
   "dependencies": {
     "@base-ui/react": "1.5.0",
-    "@higgsfield/app-landing": "workspace:*",
-    "@higgsfield/fnf": "workspace:*",
-    "@higgsfield/fnf-react": "workspace:*",
-    "@higgsfield/quanta": "workspace:*",
     "@phosphor-icons/react": "^2.1.10",
     "@shadcn/react": "^0.2.1",
     "@tailwindcss/vite": "^4.3.2",

@@ -66,9 +66,9 @@ function buildHead(meta: AppMeta) {
     links: [
       { rel: "stylesheet", href: appCss },
       ...(favicon ? [{ rel: "icon", href: favicon, type: "image/svg+xml" }] : []),
-      { rel: "apple-touch-icon", href: "/icons/apple-touch-icon.png" },
-      { rel: "manifest", href: "/site.webmanifest" },
-      { rel: "icon", href: "/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { rel: "apple-touch-icon", href: "https://atelier-dimension.higgsfield.app/icons/apple-touch-icon.png" },
+      { rel: "manifest", href: "https://atelier-dimension.higgsfield.app/site.webmanifest" },
+      { rel: "icon", href: "https://atelier-dimension.higgsfield.app/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
     ],
   };
 }

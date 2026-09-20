@@ -29,13 +29,8 @@ function useAdminSession() {
   });
 }
 
-function getClientKey() {
-  const forwarded = process.env.NODE_ENV === "production" ? undefined : "development";
-  return forwarded ?? "production";
-}
-
 function checkLoginLimit() {
-  const key = getClientKey();
+  const key = "admin-login";
   const now = Date.now();
   const current = attempts.get(key);
 
@@ -52,6 +47,12 @@ function checkLoginLimit() {
   return true;
 }
 
+function isAdminConfigured() {
+  const password = process.env.ADMIN_PASSWORD;
+  const sessionSecret = process.env.ADMIN_SESSION_SECRET;
+  return Boolean(password && sessionSecret && sessionSecret.length >= 32);
+}
+
 async function requireAdmin() {
   const session = await useAdminSession();
   if (!session.data.authenticated) {
@@ -62,16 +63,15 @@ async function requireAdmin() {
 
 export const getAdminStatus = createServerFn({ method: "GET" }).handler(
   async () => {
-    const configured = Boolean(
-      process.env.ADMIN_PASSWORD && process.env.ADMIN_SESSION_SECRET,
-    );
-
-    if (!configured) {
+    if (!isAdminConfigured()) {
       return { configured: false, authenticated: false };
     }
 
     const session = await useAdminSession();
-    return { configured: true, authenticated: Boolean(session.data.authenticated) };
+    return {
+      configured: true,
+      authenticated: Boolean(session.data.authenticated),
+    };
   },
 );
 
@@ -82,7 +82,7 @@ export const adminLogin = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data }) => {
-    if (!process.env.ADMIN_PASSWORD || !process.env.ADMIN_SESSION_SECRET) {
+    if (!isAdminConfigured()) {
       return { success: false, message: "Admin access is not configured yet." };
     }
 

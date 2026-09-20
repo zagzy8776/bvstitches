@@ -14,8 +14,8 @@ import appMetaJson from "../app-meta.json";
 
 declare const __HF_DESIGN_INSPECTOR__: boolean;
 
-const DEFAULT_TITLE = "Atelier Dimension";
-const DEFAULT_DESCRIPTION = "A spatial fashion study built from measurement, silhouette and textile detail.";
+const DEFAULT_TITLE = "BV Stitches | Bespoke Tailoring";
+const DEFAULT_DESCRIPTION = "Book a fitting with BV Stitches for bespoke tailoring, native wear, alterations and detailed finishing.";
 
 type AppMeta = {
   og_title?: string | null;
@@ -54,7 +54,7 @@ function buildHead(meta: AppMeta) {
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title },
       { name: "description", content: description },
-      { name: "author", content: "Atelier Dimension" },
+      { name: "author", content: "BV Stitches" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
@@ -66,9 +66,9 @@ function buildHead(meta: AppMeta) {
     links: [
       { rel: "stylesheet", href: appCss },
       ...(favicon ? [{ rel: "icon", href: favicon, type: "image/svg+xml" }] : []),
-      { rel: "apple-touch-icon", href: "https://atelier-dimension.higgsfield.app/icons/apple-touch-icon.png" },
-      { rel: "manifest", href: "https://atelier-dimension.higgsfield.app/site.webmanifest" },
-      { rel: "icon", href: "https://atelier-dimension.higgsfield.app/icons/favicon-32.png", sizes: "32x32", type: "image/png" },
+      
+      
+      
     ],
   };
 }

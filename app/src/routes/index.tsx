@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { createBooking } from "@/lib/bookings.functions";
+import { ScrollScrub } from "@/components/scroll-scrub/scroll-scrub";
+import { scrollScrubScenes, scrollScrubTheme } from "@/scroll-scrub-scenes";
 
 const gallery = [
   { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3JbltxQLnbF9eGRc79IWTBj1wRG/c4089901-ded9-4586-9770-334c8b8a4218.jpg", label: "Double-breasted tailoring" },
@@ -107,9 +109,17 @@ function BVStitchesHome() {
         </div>
       </section>
 
+      <section className="bv-immersive" aria-labelledby="immersive-heading">
+        <div className="bv-immersive-head">
+          <span id="immersive-heading" className="section-number">02 / ATELIER MOTION</span>
+          <p>Scroll through the craft story. The original immersive studio sequence is restored here as the bridge between the editorial page and the booking experience.</p>
+        </div>
+        <ScrollScrub scenes={scrollScrubScenes} theme={scrollScrubTheme} />
+      </section>
+
       <section id="work" className="bv-work">
         <div className="work-head">
-          <div><span className="section-number">02 / SELECTED WORK</span><h2>Cut.<br /><em>Stitched.</em></h2></div>
+          <div><span className="section-number">03 / SELECTED WORK</span><h2>Cut.<br /><em>Stitched.</em></h2></div>
           <p>Explore recent tailoring, embroidery and finishing details from the atelier.</p>
         </div>
         <div className="bv-gallery">
@@ -123,7 +133,7 @@ function BVStitchesHome() {
       </section>
 
       <section id="process" className="bv-process">
-        <div className="section-number">03 / THE PROCESS</div>
+        <div className="section-number">04 / THE PROCESS</div>
         <div className="process-grid">
           <article><span>01</span><h3>Tell us what you want</h3><p>Choose a service and tell us what you are making, from a complete suit to a native look or a refined alteration.</p></article>
           <article><span>02</span><h3>Come in for your fitting</h3><p>We take the measurements and discuss fabric, silhouette, details and the occasion the garment is for.</p></article>
@@ -133,7 +143,7 @@ function BVStitchesHome() {
 
       <section id="book" className="bv-book">
         <div className="book-copy">
-          <span className="section-number">04 / APPOINTMENTS</span>
+          <span className="section-number">05 / APPOINTMENTS</span>
           <h2>Let's make<br /><em>something yours.</em></h2>
           <p>Request a fitting below. Your preferred time is a request until BV Stitches confirms the appointment.</p>
           <div className="book-contact">
@@ -163,7 +173,7 @@ function BVStitchesHome() {
       <footer className="bv-footer">
         <div className="bv-logo"><span>BV</span> STITCHES</div>
         <p>Tailoring with intention. Built around you.</p>
-        <div><a href="tel:+2349015618873">0901 561 8873</a><a href="https://www.tiktok.com/@bvstitches" target="_blank" rel="noreferrer">TikTok ↗</a></div>
+        <div><a href="/admin">Private studio ↗</a><a href="tel:+2349015618873">0901 561 8873</a><a href="https://www.tiktok.com/@bvstitches" target="_blank" rel="noreferrer">TikTok ↗</a></div>
       </footer>
     </main>
   );

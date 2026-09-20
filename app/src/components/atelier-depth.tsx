@@ -398,12 +398,12 @@ export function AtelierDepth() {
     const shoulderTape = createTorus(0.85, 0.018, 0.38);
 
     const buttons: Mesh[] = [
-      createSphere(0.075, [0.33, 0.72, 0.71], 18, 12),
-      createSphere(0.075, [0.33, 0.39, 0.78], 18, 12),
-      createSphere(0.075, [0.33, 0.06, 0.80], 18, 12),
-      createSphere(0.075, [-0.33, 0.72, 0.71], 18, 12),
-      createSphere(0.075, [-0.33, 0.39, 0.78], 18, 12),
-      createSphere(0.075, [-0.33, 0.06, 0.80], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
+      createSphere(0.075, [0, 0, 0], 18, 12),
     ];
 
     const floor = createLathe(

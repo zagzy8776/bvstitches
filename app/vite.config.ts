@@ -1,4 +1,5 @@
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import { nitro } from "nitro/vite";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import {
@@ -20,6 +21,7 @@ const QUANTA_ICONS_SHIM = fileURLToPath(
 
 export default defineConfig(({ command, mode }) => {
   const designInspectorEnabled = process.env.HF_DESIGN_INSPECTOR === "1" || mode === "design";
+  const isVercel = process.env.VERCEL === "1" || process.env.DEPLOY_TARGET === "vercel";
 
   return {
     // fsevents can miss edits under some setups (bun-launched dev, synced/virtual
@@ -97,9 +99,8 @@ export default defineConfig(({ command, mode }) => {
       // SSR-safe: never touch browser-only globals (window, document,
       // localStorage, navigator) during render or at module top level — only
       // inside effects/handlers, or guarded with `typeof window !== "undefined"`.
-      tanstackStart({
-        server: { entry: "server" },
-      }),
+      tanstackStart(isVercel ? {} : { server: { entry: "server" } }),
+      ...(isVercel ? [nitro()] : []),
       higgsfieldDesignInspectorVitePlugin(designInspectorEnabled),
       react({
         babel: {

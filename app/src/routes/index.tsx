@@ -1,8 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { createBooking } from "@/lib/bookings.functions";
-import { ScrollScrub } from "@/components/scroll-scrub/scroll-scrub";
-import { scrollScrubScenes, scrollScrubTheme } from "@/scroll-scrub-scenes";
+import { AtelierDepth } from "@/components/atelier-depth";
 
 const gallery = [
   { src: "https://d2ol7oe51mr4n9.cloudfront.net/user_3JbltxQLnbF9eGRc79IWTBj1wRG/c4089901-ded9-4586-9770-334c8b8a4218.jpg", label: "Double-breasted tailoring" },
@@ -111,10 +110,10 @@ function BVStitchesHome() {
 
       <section className="bv-immersive" aria-labelledby="immersive-heading">
         <div className="bv-immersive-head">
-          <span id="immersive-heading" className="section-number">02 / ATELIER MOTION</span>
-          <p>Scroll through the craft story. The original immersive studio sequence is restored here as the bridge between the editorial page and the booking experience.</p>
+          <span id="immersive-heading" className="section-number">02 / ATELIER DEPTH</span>
+          <p>Move your pointer across the composition. Depth layers and WebGL respond with a restrained, tactile parallax treatment.</p>
         </div>
-        <ScrollScrub scenes={scrollScrubScenes} theme={scrollScrubTheme} />
+        <AtelierDepth />
       </section>
 
       <section id="work" className="bv-work">

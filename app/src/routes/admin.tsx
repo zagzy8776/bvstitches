@@ -1,9 +1,8 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import {
   ArrowUpRight,
   CalendarDays,
-  Check,
   Clock3,
   LogOut,
   RefreshCw,
@@ -26,10 +25,7 @@ export const Route = createFileRoute("/admin")({
   loader: async () => {
     const auth = await getAdminStatus();
     if (!auth.authenticated) {
-      return {
-        auth,
-        dashboard: null,
-      };
+      return { auth, dashboard: null };
     }
 
     return {
@@ -90,14 +86,19 @@ function AdminPage() {
                 event.preventDefault();
                 setLoginBusy(true);
                 setLoginMessage("");
-                const result = await adminLogin({ data: { password } });
-                setLoginBusy(false);
-                if (!result.success) {
-                  setLoginMessage(result.message);
-                  return;
+                try {
+                  const result = await adminLogin({ data: { password } });
+                  if (!result.success) {
+                    setLoginMessage(result.message);
+                    return;
+                  }
+                  setPassword("");
+                  await router.invalidate();
+                } catch (error) {
+                  setLoginMessage(error instanceof Error ? error.message : "Could not sign in.");
+                } finally {
+                  setLoginBusy(false);
                 }
-                setPassword("");
-                await router.invalidate();
               }}
             >
               <label>
@@ -124,28 +125,23 @@ function AdminPage() {
     );
   }
 
-  if (!dashboard) {
-    return null;
-  }
+  if (!dashboard) return null;
 
   const { bookings, summary, configured } = dashboard;
   const normalizedSearch = search.trim().toLowerCase();
+  const visibleBookings = (bookings ?? []).filter((booking) => {
+    const matchesFilter = filter === "all" || booking.status === filter;
+    const haystack = [
+      booking.fullName,
+      booking.email,
+      booking.phone,
+      booking.service,
+      booking.preferredDate,
+      booking.preferredTime,
+    ].join(" ").toLowerCase();
 
-  const visibleBookings = useMemo(() => {
-    if (!bookings) return [];
-    return bookings.filter((booking) => {
-      const matchesFilter = filter === "all" || booking.status === filter;
-      const haystack = [
-        booking.fullName,
-        booking.email,
-        booking.phone,
-        booking.service,
-        booking.preferredDate,
-        booking.preferredTime,
-      ].join(" ").toLowerCase();
-      return matchesFilter && (!normalizedSearch || haystack.includes(normalizedSearch));
-    });
-  }, [bookings, filter, normalizedSearch]);
+    return matchesFilter && (!normalizedSearch || haystack.includes(normalizedSearch));
+  });
 
   const handleStatus = async (bookingId: string, status: Status) => {
     setBusyId(bookingId);
@@ -161,8 +157,11 @@ function AdminPage() {
   };
 
   const handleLogout = async () => {
-    await adminLogout();
-    await router.invalidate();
+    try {
+      await adminLogout();
+    } finally {
+      await router.invalidate();
+    }
   };
 
   return (
@@ -176,7 +175,7 @@ function AdminPage() {
           <a href="/" className="admin-icon-link" aria-label="Open public site" title="Open public site">
             <ArrowUpRight size={16} />
           </a>
-          <button className="admin-icon-link" type="button" onClick={handleLogout} aria-label="Sign out" title="Sign out">
+          <button className="admin-icon-link" type="button" onClick={() => void handleLogout()} aria-label="Sign out" title="Sign out">
             <LogOut size={16} />
           </button>
         </div>
@@ -233,6 +232,8 @@ function AdminPage() {
               key={item}
               onClick={() => setFilter(item)}
               type="button"
+              role="tab"
+              aria-selected={filter === item}
             >
               {item}
               <span>{item === "all" ? summary.total : summary[item]}</span>

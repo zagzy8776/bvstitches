@@ -1,19 +1,19 @@
 import type { ScrollScrubScene, ScrollScrubTheme } from "@/components/scroll-scrub/scroll-scrub";
 
 export const scrollScrubTheme: ScrollScrubTheme = {
-  accent: "#F3D000",
-  background: "#151716",
-  ink: "#F4F5F2",
-  muted: "#B5BAB4",
+  accent: "#C7A96B",
+  background: "#0B1220",
+  ink: "#F4F0E8",
+  muted: "#B8B1A5",
 };
 
 export const scrollScrubScenes: ScrollScrubScene[] = [
   {
     id: "atelier-motion",
     label: "Motion",
-    kicker: "Atelier / 02",
-    title: "The camera is the tape.",
-    body: "A continuous move through the garments, from measured silhouette to textile detail.",
+    kicker: "BV Stitches / Atelier Motion",
+    title: "Cut in motion.",
+    body: "Move through the atelier sequence from measured silhouette to textile detail, restored as the site's immersive studio chapter.",
     clip: "https://atelier-dimension.higgsfield.app/assets/world/atelier-journey.mp4",
     mobileClip: "https://atelier-dimension.higgsfield.app/assets/world/atelier-journey-mobile.mp4",
     poster: "https://atelier-dimension.higgsfield.app/assets/world/atelier-journey-poster.png",

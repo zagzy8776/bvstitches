@@ -41,3 +41,123 @@
 @media(max-width:900px){.atelier-depth{height:76svh;min-height:560px}.depth-image{inset:7% 5%}.depth-center{inset:17% 17% 18% 17%}.depth-right{inset:14% 3% 28% 58%}.depth-tape{inset:28% 48% 12% 5%}.depth-foreground{inset:5% -10% 8% 50%}.atelier-cursor{display:none}.depth-mark{left:6vw;bottom:4vh}.depth-caption{right:6vw;bottom:4vh;max-width:160px;text-align:right;line-height:1.4}}
 @media(max-width:560px){.atelier-depth{height:70svh;min-height:500px}.depth-base{clip-path:inset(0 round 20px)}.depth-center{inset:19% 10% 17% 10%;opacity:.74}.depth-right{inset:15% -6% 28% 58%;opacity:.3}.depth-tape{inset:31% 42% 11% -4%;opacity:.2}.depth-foreground{inset:4% -28% 7% 48%;opacity:.2}.depth-mark{font-size:8px}.depth-caption{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.depth-webgl{opacity:.3}.atelier-cursor{display:none}.depth-image{transform:none!important}.atelier-depth{min-height:520px}}
+
+
+/* True WebGL 3D atelier presentation */
+.atelier-depth{
+  position:relative;
+  height:min(94svh,920px);
+  min-height:620px;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(24,42,67,.55),transparent 34%),
+    radial-gradient(circle at 18% 70%,rgba(199,169,107,.11),transparent 27%),
+    linear-gradient(145deg,#070D17 0%,#0B1220 54%,#111D2F 100%);
+  border-top:1px solid rgba(199,169,107,.24);
+  border-bottom:1px solid rgba(199,169,107,.24);
+  box-shadow:inset 0 40px 110px rgba(0,0,0,.15),inset 0 -70px 140px rgba(0,0,0,.24);
+}
+.depth-webgl{
+  position:absolute;
+  inset:0;
+  z-index:4;
+  display:block;
+  width:100%;
+  height:100%;
+  opacity:1;
+  mix-blend-mode:normal;
+  pointer-events:none;
+}
+.depth-vignette{
+  position:absolute;
+  z-index:8;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 44%,transparent 22%,rgba(4,8,14,.06) 52%,rgba(4,8,14,.66) 100%),
+    linear-gradient(115deg,rgba(6,11,19,.38),transparent 40%,rgba(6,11,19,.42));
+}
+.depth-grid{
+  position:absolute;
+  z-index:2;
+  inset:0;
+  pointer-events:none;
+  opacity:.12;
+  background-image:
+    linear-gradient(rgba(217,199,158,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(217,199,158,.16) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(circle at center,black 0%,transparent 68%);
+}
+.atelier-depth::before{
+  content:"";
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:48%;
+  width:min(42vw,520px);
+  height:min(42vw,520px);
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(217,199,158,.15);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 48px rgba(217,199,158,.025),
+    0 0 0 96px rgba(217,199,158,.018),
+    0 0 90px rgba(199,169,107,.09);
+  pointer-events:none;
+}
+.atelier-depth::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:48%;
+  width:1px;
+  height:min(55vw,620px);
+  transform:translate(-50%,-50%);
+  background:linear-gradient(transparent,rgba(217,199,158,.14),transparent);
+  pointer-events:none;
+}
+.depth-mark,.depth-caption,.depth-live{
+  position:absolute;
+  z-index:12;
+  color:rgba(244,240,232,.78);
+  font:9px/1.35 "IBM Plex Mono",monospace;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.depth-mark{left:5vw;bottom:5vh}
+.depth-caption{right:5vw;bottom:5vh;color:var(--gold-soft);text-align:right}
+.depth-live{
+  left:50%;
+  top:50%;
+  transform:translate(-50%,calc(min(38vw,430px)));
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:rgba(244,240,232,.62);
+  letter-spacing:.1em;
+}
+.depth-live span{
+  display:block;
+  width:7px;
+  height:7px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 0 4px rgba(199,169,107,.08);
+}
+@media(max-width:900px){
+  .atelier-depth{height:78svh;min-height:560px}
+  .atelier-depth::before{width:58vw;height:58vw}
+  .atelier-depth::after{height:62vw}
+  .depth-live{transform:translate(-50%,38vw)}
+}
+@media(max-width:560px){
+  .atelier-depth{height:70svh;min-height:500px}
+  .atelier-depth::before{width:72vw;height:72vw}
+  .depth-grid{background-size:50px 50px}
+  .depth-mark{left:5vw;bottom:4vh}
+  .depth-caption{right:5vw;bottom:4vh;max-width:150px}
+  .depth-live{top:50%;transform:translate(-50%,36vw);white-space:nowrap}
+}

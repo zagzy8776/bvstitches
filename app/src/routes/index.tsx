@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { createBooking } from "@/lib/bookings.functions";
 
@@ -52,7 +52,7 @@ function BVStitchesHome() {
     }
   };
 
-  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setState("saving");
     setMessage("");

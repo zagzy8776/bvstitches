@@ -21,6 +21,19 @@ import {
 type Status = "pending" | "confirmed" | "completed" | "cancelled";
 type Filter = "all" | Status;
 
+type AdminBooking = {
+  id: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  service: string;
+  preferredDate: string;
+  preferredTime: string;
+  notes: string;
+  status: Status;
+  createdAt: string;
+};
+
 export const Route = createFileRoute("/admin")({
   loader: async () => {
     const auth = await getAdminStatus();
@@ -129,7 +142,7 @@ function AdminPage() {
 
   const { bookings, summary, configured } = dashboard;
   const normalizedSearch = search.trim().toLowerCase();
-  const visibleBookings = (bookings ?? []).filter((booking) => {
+  const visibleBookings = ((bookings ?? []) as AdminBooking[]).filter((booking) => {
     const matchesFilter = filter === "all" || booking.status === filter;
     const haystack = [
       booking.fullName,

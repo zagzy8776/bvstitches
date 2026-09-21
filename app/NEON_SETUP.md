@@ -8,20 +8,29 @@ Create a Neon project and copy its connection string.
 
 ## 2. Run the schema
 
-Run the SQL in:
+```bash
+cd app
+npm run db:migrate
+```
 
-app/db/migrations/001_bookings.sql
+`scripts/apply-migrations.mjs` applies every file in `app/db/migrations/` in
+lexical order, reading `DATABASE_URL` from `.env` (or from the environment).
+`001_bookings.sql` creates the `bookings` table plus a partial unique index that
+stops two active requests from claiming the same date/time slot.
 
-This creates the `bookings` table and prevents two active requests from taking the same date/time slot.
+Migrations are additive and use `if not exists`, so re-running is safe. The
+script prints each statement and finishes with the list of public tables, so you
+can confirm it actually landed.
 
 ## 3. Configure the app
 
-For local development, create `app/.dev.vars` or your local environment file with:
+For local development, put the connection string in `app/.env` (gitignored):
 
 ```
 DATABASE_URL="your-neon-connection-string"
 ```
 
-For the deployed Cloudflare Worker, add `DATABASE_URL` as a secret/environment variable in the deployment platform. Do not commit the real connection string.
+For the deployed Worker, add `DATABASE_URL` as a secret/environment variable in
+the deployment platform. Do not commit the real connection string.
 
 The app uses Neon’s serverless driver, which is designed for edge/serverless runtimes such as Cloudflare Workers.

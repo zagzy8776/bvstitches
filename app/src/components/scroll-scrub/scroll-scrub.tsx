@@ -7,7 +7,11 @@ import "./scroll-scrub.css";
 
 export interface ScrollScrubScene {
   id: string;
-  label: string;
+  /**
+   * Optional chapter-nav label. The route nav is only rendered when at least
+   * one scene sets this, so single-scene builds don't show a lone button.
+   */
+  label?: string;
   /** Exact first frame of the deployed desktop clip. */
   poster: string;
   /** Exact first frame of mobileClip; provide whenever mobileClip is set. */
@@ -587,6 +591,8 @@ export function ScrollScrub({
     return null;
   }
 
+  const hasRouteLabels = scenes.some((scene) => Boolean(scene.label));
+
   const themeStyle: ThemeStyle = {
     "--ss-accent": theme.accent,
     "--ss-bg": theme.background,
@@ -639,19 +645,23 @@ export function ScrollScrub({
           <span />
         </div>
 
-        <nav aria-label="Scroll chapters" className="scroll-scrub__route">
-          {scenes.map((scene, index) => (
-            <button
-              aria-current={activeSection === index ? "step" : undefined}
-              className="scroll-scrub__route-button"
-              key={scene.id}
-              onClick={() => controllerRef.current?.jumpToSection(index)}
-              type="button"
-            >
-              <span>{scene.label}</span>
-            </button>
-          ))}
-        </nav>
+        {hasRouteLabels ? (
+          <nav aria-label="Scroll chapters" className="scroll-scrub__route">
+            {scenes.map((scene, index) =>
+              scene.label ? (
+                <button
+                  aria-current={activeSection === index ? "step" : undefined}
+                  className="scroll-scrub__route-button"
+                  key={scene.id}
+                  onClick={() => controllerRef.current?.jumpToSection(index)}
+                  type="button"
+                >
+                  <span>{scene.label}</span>
+                </button>
+              ) : null
+            )}
+          </nav>
+        ) : null}
       </div>
 
       <div className="scroll-scrub__story">

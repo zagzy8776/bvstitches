@@ -15,7 +15,8 @@
     "check:ui": "node scripts/check-ui.mjs",
     "check:adapted": "bun scripts/check-adaptation.mjs",
     "test": "bun test tests/*.test.ts",
-    "build:vercel": "DEPLOY_TARGET=vercel vite build"
+    "build:vercel": "DEPLOY_TARGET=vercel vite build",
+    "db:migrate": "node --env-file-if-exists=.env scripts/apply-migrations.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.5.0",

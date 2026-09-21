@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   CalendarDays,
   Clock3,
+  Hash,
   LogOut,
   RefreshCw,
   Search,
@@ -20,6 +21,15 @@ import {
 
 type Status = "pending" | "confirmed" | "completed" | "cancelled";
 type Filter = "all" | Status;
+
+/**
+ * Short reference shown to the client by the public booking form
+ * (see the success message in routes/index.tsx). Keep both in lockstep — this
+ * is the value a client quotes back on the phone.
+ */
+function referenceFor(bookingId: string) {
+  return bookingId.slice(0, 8).toUpperCase();
+}
 
 type AdminBooking = {
   id: string;
@@ -280,6 +290,10 @@ function AdminPage() {
                     <div>
                       <strong>{booking.fullName}</strong>
                       <span>{booking.email}</span>
+                      <span className="admin-ref">
+                        <Hash aria-hidden="true" size={11} />
+                        {referenceFor(booking.id)}
+                      </span>
                     </div>
                   </div>
 

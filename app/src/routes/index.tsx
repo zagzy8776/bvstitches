@@ -109,11 +109,7 @@ function BVStitchesHome() {
         </div>
       </section>
 
-      <section className="bv-immersive" aria-labelledby="immersive-heading">
-        <div className="bv-immersive-head">
-          <span id="immersive-heading" className="section-number">02 / HIGGSFIELD ATELIER</span>
-          <p>The original Higgsfield atelier sequence is back in the site. Scroll through the real clip; the BV Stitches poster keeps the section intact while the remote media loads.</p>
-        </div>
+      <section className="bv-immersive">
         <ScrollScrub scenes={scrollScrubScenes} theme={scrollScrubTheme} />
       </section>
 

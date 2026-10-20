@@ -9,6 +9,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import jlAdminCss from "../jl-admin.css?url";
 import { reportHiggsfieldError } from "../lib/higgsfield-error-reporting";
 import appMetaJson from "../app-meta.json";
 
@@ -63,6 +64,7 @@ function buildHead(meta: AppMeta) {
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: jlAdminCss },
       ...(favicon ? [{ rel: "icon", href: favicon, type: "image/svg+xml" }] : []),
     ],
   };
